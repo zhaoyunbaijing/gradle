@@ -36,6 +36,7 @@ class TaskDependencyIntegrationTest extends AbstractIntegrationSpec {
         '''
 
         when:
+        executer.expectDeprecationWarning()
         succeeds "foo"
 
         then:
@@ -85,6 +86,7 @@ class TaskDependencyIntegrationTest extends AbstractIntegrationSpec {
         '''
 
         when:
+        executer.expectDeprecationWarning()
         succeeds "foo"
 
         then:
