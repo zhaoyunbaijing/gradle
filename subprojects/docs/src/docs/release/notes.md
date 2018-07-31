@@ -93,6 +93,13 @@ Instances of this class are intended to be created only by the `project-reports`
 
 These methods have been deprecated and the `create()` or `register()` methods should be used instead.
 
+### Removing task dependencies from a Task instance
+
+Code such as `foo.dependsOn.remove(bar)` is prone to errors and rely on the internal implementation details of how tasks were wired together.
+Removing task dependencies from a Task instance will become an error in Gradle 5.0.
+At the moment, we aren't providing an alternative as this is considered as bad practice and sensitive to configuration ordering issues.
+Please open an issue to express use cases for the Gradle team to consider for a replacement.
+
 ## Potential breaking changes
 
 ### Kotlin DSL breakages
