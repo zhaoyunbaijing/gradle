@@ -112,8 +112,7 @@ class ForkingGradleSession implements GradleSession {
     private static ProcessBuilder newProcessBuilder(BuildExperimentInvocationInfo invocationInfo, List<String> args, Map<String, String> env) {
         def builder = new ProcessBuilder()
             .directory(invocationInfo.projectDir)
-            .redirectOutput(Redirect.appendTo(invocationInfo.buildLog))
-            .redirectError(Redirect.appendTo(invocationInfo.buildLog))
+            .inheritIO()
             .command(args)
         builder.environment().putAll(env)
         builder
