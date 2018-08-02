@@ -115,6 +115,8 @@ class ForkingGradleSession implements GradleSession {
             .inheritIO()
             .command(args)
         builder.environment().putAll(env)
+
+        println("dir: ${invocationInfo.projectDir} args: ${args} envs: ${env}")
         builder
     }
 }
