@@ -401,6 +401,14 @@ class AbstractIntegrationSpec extends Specification {
         }
     }
 
+    def requireMirrorInitScriptInOwnGradleUserHomeDir() {
+        executer.beforeExecute {
+            executer.requireOwnGradleUserHomeDir()
+            File initScript = new File(executer.getGradleUserHomeDir(), "init.gradle")
+            RepoScriptBlockUtil.createMirrorInitScript(initScript)
+        }
+    }
+
     void outputDoesNotContain(String string) {
         assertHasResult()
         result.assertNotOutput(string.trim())

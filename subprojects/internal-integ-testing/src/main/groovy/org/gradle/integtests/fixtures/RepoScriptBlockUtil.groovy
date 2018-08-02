@@ -161,8 +161,13 @@ class RepoScriptBlockUtil {
     }
 
     static File createMirrorInitScript() {
-        File mirrors = File.createTempFile("mirrors", ".gradle")
+        return createMirrorInitScript(File.createTempFile("mirrors", ".gradle"))
+    }
+
+    static File createMirrorInitScript(File mirrors) {
         mirrors.deleteOnExit()
+        mirrors.parentFile.mkdirs()
+        mirrors.createNewFile()
         def mirrorConditions = MirroredRepository.values().collect { MirroredRepository mirror ->
             """
                 if (normalizeUrl(repo.url) == normalizeUrl('${mirror.originalUrl}')) {

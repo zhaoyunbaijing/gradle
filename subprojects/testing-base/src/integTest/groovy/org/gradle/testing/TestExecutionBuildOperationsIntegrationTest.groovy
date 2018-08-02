@@ -32,6 +32,10 @@ class TestExecutionBuildOperationsIntegrationTest extends AbstractIntegrationSpe
 
     def operations = new BuildOperationsFixture(executer, temporaryFolder)
 
+    def setup() {
+        requireMirrorInitScriptInOwnGradleUserHomeDir()
+    }
+
     def "emitsBuildOperationsForJUnitTests"() {
         when:
         run "test"

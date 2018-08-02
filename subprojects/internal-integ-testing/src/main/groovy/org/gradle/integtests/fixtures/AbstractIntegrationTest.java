@@ -161,4 +161,15 @@ public abstract class AbstractIntegrationTest {
             }
         });
     }
+
+    public void requireMirrorInitScriptInOwnGradleUserHomeDir() {
+        executer.beforeExecute(new Action<GradleExecuter>() {
+            @Override
+            public void execute(GradleExecuter gradleExecuter) {
+                gradleExecuter.requireOwnGradleUserHomeDir();
+                File initScript = new File(executer.getGradleUserHomeDir(), "init.gradle");
+                RepoScriptBlockUtil.createMirrorInitScript(initScript);
+            }
+        });
+    }
 }

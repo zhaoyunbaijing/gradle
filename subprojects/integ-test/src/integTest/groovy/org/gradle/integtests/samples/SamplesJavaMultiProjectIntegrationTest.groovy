@@ -46,6 +46,7 @@ class SamplesJavaMultiProjectIntegrationTest extends AbstractIntegrationTest {
     void setUp() {
         javaprojectDir = sample.dir
         projects = [SHARED_NAME, API_NAME, WEBAPP_PATH].collect {"$JAVA_PROJECT_NAME/$it"} + JAVA_PROJECT_NAME
+        requireMirrorInitScriptInOwnGradleUserHomeDir()
     }
 
     @Test
