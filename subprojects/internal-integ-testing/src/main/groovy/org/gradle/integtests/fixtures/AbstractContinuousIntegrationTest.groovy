@@ -23,10 +23,9 @@ import org.gradle.integtests.fixtures.executer.ExecutionResult
 import org.gradle.integtests.fixtures.executer.GradleHandle
 import org.gradle.integtests.fixtures.executer.OutputScrapingExecutionResult
 import org.gradle.integtests.fixtures.executer.UnexpectedBuildFailure
+import org.gradle.integtests.fixtures.timeout.JavaProcessStackTracesMonitor
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.test.fixtures.ConcurrentTestUtil
-import org.gradle.testing.internal.util.RetryRule
-import org.junit.Rule
 
 import java.util.concurrent.TimeUnit
 
@@ -39,9 +38,6 @@ abstract class AbstractContinuousIntegrationTest extends AbstractIntegrationSpec
     private static final boolean OS_IS_WINDOWS = OperatingSystem.current().isWindows()
     private static final String CHANGE_DETECTED_OUTPUT = "Change detected, executing build..."
     private static final String WAITING_FOR_CHANGES_OUTPUT = "Waiting for changes to input files of tasks..."
-
-    @Rule
-    RetryRule timeoutRetryRule = RetryRuleUtil.retryContinuousBuildSpecificationOnTimeout(this)
 
     GradleHandle gradle
 
@@ -200,6 +196,8 @@ ${result.error}
             }
         }
         if (gradle.isRunning() && !endOfBuildReached) {
+            println "Thread dump of all running daemons:"
+            println JavaProcessStackTracesMonitor.allStackTracesByJstack
             throw new RuntimeException("""Timeout waiting for build to complete. Output:
 $lastOutput
 """)
