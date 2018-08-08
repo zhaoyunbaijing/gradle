@@ -17,6 +17,7 @@
 package org.gradle.integtests.fixtures
 
 import org.gradle.api.JavaVersion
+import org.gradle.integtests.fixtures.timeout.JavaProcessStackTracesMonitor
 import org.gradle.testing.internal.util.RetryRule
 import org.gradle.util.GradleVersion
 import org.gradle.util.TestPrecondition
@@ -115,6 +116,8 @@ class RetryRuleUtil {
     static RetryRule retryContinuousBuildSpecificationOnTimeout(Specification specification) {
         RetryRule.retryIf(specification) { t ->
             if (t?.message?.startsWith('Timeout waiting for build to complete.')) {
+                println "Timeout waiting for build to complete, thread dump of all running daemons:"
+                println JavaProcessStackTracesMonitor.allStackTracesByJstack
                 println "Retrying continuous build test because of timeout"
                 return retryWithCleanProjectDir(specification)
             }
