@@ -175,6 +175,11 @@ class CompositeContinuousBuildIntegrationTest extends Java7RequiringContinuousIn
         outputContains("Goodbye World")
     }
 
+    def "fail to disable caching"() {
+        expect:
+        false
+    }
+
     def "will rebuild on change for build included into a multi-project build"() {
         def includedLibrary = singleProjectBuild("library") {
             buildFile << """
