@@ -24,7 +24,7 @@ import org.gradle.internal.reflect.Instantiator;
 import org.gradle.plugins.ear.descriptor.DeploymentDescriptor;
 import org.gradle.plugins.ear.descriptor.internal.DefaultDeploymentDescriptor;
 import org.gradle.util.ConfigureUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -60,7 +60,7 @@ public class EarPluginConvention {
     @Inject
     @Deprecated
     public EarPluginConvention(FileResolver fileResolver, ObjectFactory objectFactory) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of EarPluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of EarPluginConvention");
         this.fileResolver = fileResolver;
         this.objectFactory = objectFactory;
         deploymentDescriptor = objectFactory.newInstance(DefaultDeploymentDescriptor.class, fileResolver, objectFactory);

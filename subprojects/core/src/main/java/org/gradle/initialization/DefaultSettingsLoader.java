@@ -22,7 +22,7 @@ import org.gradle.api.internal.GradleInternal;
 import org.gradle.api.internal.SettingsInternal;
 import org.gradle.api.internal.initialization.ClassLoaderScope;
 import org.gradle.initialization.buildsrc.BuildSourceBuilder;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 
@@ -86,7 +86,7 @@ public class DefaultSettingsLoader implements SettingsLoader {
                 return;
             }
         }
-        DeprecationLogger.nagUserWith("Support for nested build without a settings file was deprecated.", "You should create a empty settings file in " + projectDir.getAbsolutePath() + ".");
+        SingleMessageLogger.nagUserWith("Support for nested build without a settings file was deprecated.", "You should create a empty settings file in " + projectDir.getAbsolutePath() + ".");
     }
 
     private void setDefaultProject(ProjectSpec spec, SettingsInternal settings) {

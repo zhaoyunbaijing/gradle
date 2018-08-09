@@ -19,7 +19,7 @@ package org.gradle.internal.jvm;
 import org.gradle.api.GradleException;
 import org.gradle.api.JavaVersion;
 import org.gradle.api.internal.DocumentationRegistry;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GradleVersion;
 
 public class UnsupportedJavaRuntimeException extends GradleException {
@@ -33,7 +33,7 @@ public class UnsupportedJavaRuntimeException extends GradleException {
 
     public static void javaDeprecationWarning() {
         if (!JavaVersion.current().isJava8Compatible()) {
-            DeprecationLogger.nagUserWithDeprecatedBuildInvocationFeature(JAVA7_DEPRECATION_WARNING, JAVA7_DEPRECATION_WARNING_DOC);
+            SingleMessageLogger.nagUserWithDeprecatedBuildInvocationFeature(JAVA7_DEPRECATION_WARNING, JAVA7_DEPRECATION_WARNING_DOC);
         }
     }
 

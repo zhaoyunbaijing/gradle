@@ -43,7 +43,7 @@ import org.gradle.internal.Describables;
 import org.gradle.internal.Factory;
 import org.gradle.jvm.tasks.Jar;
 import org.gradle.language.base.plugins.LifecycleBasePlugin;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -74,7 +74,7 @@ public class BasePlugin implements Plugin<Project> {
     public void apply(final Project project) {
         project.getPluginManager().apply(LifecycleBasePlugin.class);
 
-        BasePluginConvention convention = DeprecationLogger.whileDisabled(new Factory<BasePluginConvention>() {
+        BasePluginConvention convention = SingleMessageLogger.whileDisabled(new Factory<BasePluginConvention>() {
             @Override
             public BasePluginConvention create() {
                 return new BasePluginConvention(project);

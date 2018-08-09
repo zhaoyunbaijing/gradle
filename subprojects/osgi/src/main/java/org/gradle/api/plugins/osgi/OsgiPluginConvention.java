@@ -25,7 +25,7 @@ import org.gradle.api.internal.project.ProjectInternal;
 import org.gradle.api.plugins.BasePluginConvention;
 import org.gradle.internal.Actions;
 import org.gradle.internal.reflect.Instantiator;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.util.concurrent.Callable;
 
@@ -44,7 +44,7 @@ public class OsgiPluginConvention {
      */
     @Deprecated
     public OsgiPluginConvention(ProjectInternal project) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of OsgiPluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of OsgiPluginConvention");
         this.project = project;
     }
 

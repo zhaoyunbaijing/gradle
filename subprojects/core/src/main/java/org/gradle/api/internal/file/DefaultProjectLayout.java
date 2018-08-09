@@ -42,7 +42,7 @@ import org.gradle.api.internal.tasks.TaskDependencyResolveContext;
 import org.gradle.api.internal.tasks.TaskResolver;
 import org.gradle.api.provider.Provider;
 import org.gradle.internal.file.PathToFileResolver;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -72,7 +72,7 @@ public class DefaultProjectLayout implements ProjectLayout, TaskFileVarFactory {
 
     @Override
     public DirectoryVar newDirectoryVar() {
-        DeprecationLogger.nagUserOfReplacedMethod("ProjectLayout.newDirectoryVar()", "ProjectLayout.directoryProperty()");
+        SingleMessageLogger.nagUserOfReplacedMethod("ProjectLayout.newDirectoryVar()", "ProjectLayout.directoryProperty()");
         return directoryProperty();
     }
 
@@ -90,7 +90,7 @@ public class DefaultProjectLayout implements ProjectLayout, TaskFileVarFactory {
 
     @Override
     public RegularFileVar newFileVar() {
-        DeprecationLogger.nagUserOfReplacedMethod("ProjectLayout.newFileVar()", "ProjectLayout.fileProperty()");
+        SingleMessageLogger.nagUserOfReplacedMethod("ProjectLayout.newFileVar()", "ProjectLayout.fileProperty()");
         return fileProperty();
     }
 

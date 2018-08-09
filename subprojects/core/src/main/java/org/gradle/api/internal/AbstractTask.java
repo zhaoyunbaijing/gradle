@@ -72,7 +72,7 @@ import org.gradle.internal.service.ServiceRegistry;
 import org.gradle.logging.LoggingManagerInternal;
 import org.gradle.logging.StandardOutputCapture;
 import org.gradle.util.ConfigureUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GFileUtils;
 import org.gradle.util.Path;
 
@@ -379,7 +379,7 @@ public abstract class AbstractTask implements TaskInternal, DynamicObjectAware {
 
     @Override
     public Task deleteAllActions() {
-        DeprecationLogger.nagUserOfDiscontinuedMethod("Task.deleteAllActions()");
+        SingleMessageLogger.nagUserOfDiscontinuedMethod("Task.deleteAllActions()");
         taskMutator.mutate("Task.deleteAllActions()",
             new Runnable() {
                 public void run() {
@@ -392,8 +392,8 @@ public abstract class AbstractTask implements TaskInternal, DynamicObjectAware {
 
     @Override
     public final void execute() {
-        DeprecationLogger.nagUserOfDiscontinuedMethod("TaskInternal.execute()", getReuseTaskLogicAdvice());
-        TaskExecuter executer = DeprecationLogger.whileDisabled(new Factory<TaskExecuter>() {
+        SingleMessageLogger.nagUserOfDiscontinuedMethod("TaskInternal.execute()", getReuseTaskLogicAdvice());
+        TaskExecuter executer = SingleMessageLogger.whileDisabled(new Factory<TaskExecuter>() {
             @Override
             public TaskExecuter create() {
                 return getExecuter();
@@ -405,7 +405,7 @@ public abstract class AbstractTask implements TaskInternal, DynamicObjectAware {
 
     @Override
     public TaskExecuter getExecuter() {
-        DeprecationLogger.nagUserOfDiscontinuedProperty("TaskInternal.executer", getReuseTaskLogicAdvice());
+        SingleMessageLogger.nagUserOfDiscontinuedProperty("TaskInternal.executer", getReuseTaskLogicAdvice());
         if (executer == null) {
             executer = _services.get(TaskExecuter.class);
         }
@@ -414,7 +414,7 @@ public abstract class AbstractTask implements TaskInternal, DynamicObjectAware {
 
     @Override
     public void setExecuter(TaskExecuter executer) {
-        DeprecationLogger.nagUserOfDiscontinuedProperty("TaskInternal.executer", getReuseTaskLogicAdvice());
+        SingleMessageLogger.nagUserOfDiscontinuedProperty("TaskInternal.executer", getReuseTaskLogicAdvice());
         this.executer = executer;
     }
 
@@ -596,7 +596,7 @@ public abstract class AbstractTask implements TaskInternal, DynamicObjectAware {
 
     @Override
     public boolean dependsOnTaskDidWork() {
-        DeprecationLogger.nagUserOfDiscontinuedMethod(
+        SingleMessageLogger.nagUserOfDiscontinuedMethod(
             "Task.dependsOnTaskDidWork()",
             "Instead, check the value of \"didWork()\" for each task, or declare the task inputs and outputs and let Gradle decide what needs to be run.");
         TaskDependency dependency = getTaskDependencies();
@@ -638,7 +638,7 @@ public abstract class AbstractTask implements TaskInternal, DynamicObjectAware {
 
     @Override
     public Task leftShift(final Closure action) {
-        DeprecationLogger.nagUserOfDiscontinuedMethod("Task.leftShift(Closure)", "Please use Task.doLast(Action) instead.");
+        SingleMessageLogger.nagUserOfDiscontinuedMethod("Task.leftShift(Closure)", "Please use Task.doLast(Action) instead.");
 
         hasCustomActions = true;
         if (action == null) {

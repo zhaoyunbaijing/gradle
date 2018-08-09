@@ -25,7 +25,7 @@ import org.gradle.api.internal.file.collections.MinimalFileSet;
 import org.gradle.api.internal.tasks.AbstractTaskDependency;
 import org.gradle.api.internal.tasks.TaskDependencyResolveContext;
 import org.gradle.api.tasks.compile.CompileOptions;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 import java.util.Collections;
@@ -113,7 +113,7 @@ public class AnnotationProcessorPathFactory {
     }
 
     private static Set<File> extractProcessorPath(String processorpath) {
-        DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause(
+        SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause(
             PROCESSOR_PATH_DEPRECATION_MESSAGE,
             "Instead, use the CompilerOptions.annotationProcessorPath property directly");
         LinkedHashSet<File> files = new LinkedHashSet<File>();
@@ -146,7 +146,7 @@ public class AnnotationProcessorPathFactory {
                     }
                     Map<String, AnnotationProcessorDeclaration> processors = annotationProcessorDetector.detectProcessors(compileClasspath);
                     if (!processors.isEmpty()) {
-                        DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause(
+                        SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause(
                             "Detecting annotation processors on the compile classpath",
                             "Gradle 5.0 will ignore annotation processors on the compile classpath.",
                             "Please add them to the annotation processor path instead. " +

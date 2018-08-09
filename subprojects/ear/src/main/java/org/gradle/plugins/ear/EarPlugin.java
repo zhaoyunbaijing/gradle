@@ -35,7 +35,7 @@ import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.internal.Factory;
 import org.gradle.plugins.ear.descriptor.DeploymentDescriptor;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.inject.Inject;
 import java.util.concurrent.Callable;
@@ -71,7 +71,7 @@ public class EarPlugin implements Plugin<Project> {
     public void apply(final Project project) {
         project.getPluginManager().apply(BasePlugin.class);
 
-        EarPluginConvention earPluginConvention = DeprecationLogger.whileDisabled(new Factory<EarPluginConvention>() {
+        EarPluginConvention earPluginConvention = SingleMessageLogger.whileDisabled(new Factory<EarPluginConvention>() {
             @Override
             public EarPluginConvention create() {
                 return objectFactory.newInstance(EarPluginConvention.class, fileResolver, objectFactory);

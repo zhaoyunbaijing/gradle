@@ -32,7 +32,7 @@ import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.api.tasks.bundling.War;
 import org.gradle.internal.Factory;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.inject.Inject;
 import java.util.concurrent.Callable;
@@ -56,7 +56,7 @@ public class WarPlugin implements Plugin<Project> {
 
     public void apply(final Project project) {
         project.getPluginManager().apply(JavaPlugin.class);
-        final WarPluginConvention pluginConvention = DeprecationLogger.whileDisabled(new Factory<WarPluginConvention>() {
+        final WarPluginConvention pluginConvention = SingleMessageLogger.whileDisabled(new Factory<WarPluginConvention>() {
             @Override
             public WarPluginConvention create() {
                 return new WarPluginConvention(project);

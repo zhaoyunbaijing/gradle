@@ -27,7 +27,7 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskDependency;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.internal.typeconversion.UnsupportedNotationException;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.util.ArrayDeque;
@@ -242,7 +242,7 @@ public class DefaultTaskDependency extends AbstractTaskDependency {
             for (Iterator<Object> it = delegate.iterator(); it.hasNext();) {
                 Object obj = it.next();
                 if (isTaskProvider(obj) && o instanceof Task && isTaskProviderOfTask((TaskProvider) obj, (Task) o)) {
-                    DeprecationLogger.nagUserOfDeprecatedBehaviour("Do not remove a Task instance from a task dependency set when it contains a Provider to the Task instance.");
+                    SingleMessageLogger.nagUserOfDeprecatedBehaviour("Do not remove a Task instance from a task dependency set when it contains a Provider to the Task instance.");
                     it.remove();
                     return true;
                 }

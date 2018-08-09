@@ -19,7 +19,7 @@ package org.gradle.api.tasks.compile;
 import com.google.common.collect.Maps;
 import org.gradle.api.internal.plugins.DslObject;
 import org.gradle.internal.reflect.JavaReflectionUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -48,7 +48,7 @@ public abstract class AbstractOptions implements Serializable {
         while (currClass != AbstractOptions.class) {
             for (final Field field : currClass.getDeclaredFields()) {
                 if (isOptionField(field)) {
-                    DeprecationLogger.whileDisabled(new Runnable() {
+                    SingleMessageLogger.whileDisabled(new Runnable() {
                         @Override
                         public void run() {
                             addValueToMapIfNotNull(map, field);

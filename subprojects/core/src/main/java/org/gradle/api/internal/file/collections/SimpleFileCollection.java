@@ -15,7 +15,7 @@
  */
 package org.gradle.api.internal.file.collections;
 
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 import java.io.Serializable;
@@ -36,6 +36,6 @@ public class SimpleFileCollection extends FileCollectionAdapter implements Seria
 
     private SimpleFileCollection(MinimalFileSet fileSet) {
         super(fileSet);
-        DeprecationLogger.nagUserOfDiscontinuedApi("SimpleFileCollection type", "Please use Project.files() instead.");
+        SingleMessageLogger.nagUserOfDiscontinuedApi("SimpleFileCollection type", "Please use Project.files() instead.");
     }
 }

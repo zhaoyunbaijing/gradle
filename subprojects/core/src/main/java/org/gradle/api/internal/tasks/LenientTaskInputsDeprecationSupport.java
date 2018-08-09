@@ -18,7 +18,7 @@ package org.gradle.api.internal.tasks;
 
 import org.gradle.api.NonNullApi;
 import org.gradle.api.tasks.TaskInputs;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 @NonNullApi
 class LenientTaskInputsDeprecationSupport extends TaskInputsDeprecationSupport {
@@ -30,7 +30,7 @@ class LenientTaskInputsDeprecationSupport extends TaskInputsDeprecationSupport {
 
     @Override
     protected TaskInputs getTaskInputs(String method) {
-        DeprecationLogger.nagUserOfDiscontinuedMethod("chaining of the " + method, String.format("Use '%s' on TaskInputs directly instead.", method));
+        SingleMessageLogger.nagUserOfDiscontinuedMethod("chaining of the " + method, String.format("Use '%s' on TaskInputs directly instead.", method));
         return taskInputs;
     }
 }

@@ -20,7 +20,7 @@ import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.FileTree;
 import org.gradle.api.internal.file.collections.FileCollectionResolveContext;
 import org.gradle.internal.Cast;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -55,7 +55,7 @@ public class UnionFileTree extends CompositeFileTree {
 
     @Override
     public FileCollection add(FileCollection collection) throws UnsupportedOperationException {
-        DeprecationLogger.nagUserOfReplacedMethod("FileCollection.add()", "ConfigurableFileTree.from()");
+        SingleMessageLogger.nagUserOfReplacedMethod("FileCollection.add()", "ConfigurableFileTree.from()");
         addToUnion(collection);
         return this;
     }

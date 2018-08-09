@@ -54,7 +54,7 @@ import org.gradle.internal.serialize.kryo.KryoBackedDecoder;
 import org.gradle.internal.serialize.kryo.KryoBackedEncoder;
 import org.gradle.internal.time.Time;
 import org.gradle.internal.time.Timer;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GFileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -295,7 +295,7 @@ public class DefaultScriptCompilationHandler implements ScriptCompilationHandler
                     if (phase == Phases.CANONICALIZATION) {
                         Set<String> deprecatedImports = resolveVisitor.getDeprecatedImports();
                         if (!deprecatedImports.isEmpty()) {
-                            DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause("The support for implicit import of internal classes",
+                            SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause("The support for implicit import of internal classes",
                                 "Please either stop using internal classes (recommended) or import them explicitly at the top of your build file.",
                                 StringUtils.capitalize(script.getDisplayName()) + " is using " + Joiner.on(" and ").join(deprecatedImports) + " from the private org.gradle.util package.");
                         }

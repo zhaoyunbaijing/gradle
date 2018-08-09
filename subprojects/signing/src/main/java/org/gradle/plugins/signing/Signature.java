@@ -22,7 +22,7 @@ import org.gradle.api.artifacts.PublishArtifact;
 import org.gradle.api.internal.artifacts.publish.AbstractPublishArtifact;
 import org.gradle.plugins.signing.signatory.Signatory;
 import org.gradle.plugins.signing.type.SignatureType;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -324,7 +324,7 @@ public class Signature extends AbstractPublishArtifact {
      */
     @Deprecated
     public void setFile(@SuppressWarnings("unused") File file) {
-        DeprecationLogger.nagUserOfDeprecated("Using Signature.setFile()");
+        SingleMessageLogger.nagUserOfDeprecated("Using Signature.setFile()");
     }
 
     /**

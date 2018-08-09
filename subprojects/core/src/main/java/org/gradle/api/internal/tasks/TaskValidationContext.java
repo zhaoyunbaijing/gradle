@@ -21,7 +21,7 @@ import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Task;
 import org.gradle.api.internal.file.FileResolver;
 import org.gradle.api.tasks.TaskValidationException;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public interface TaskValidationContext {
                     contextualAdviceBuilder.append("\n - ");
                     contextualAdviceBuilder.append(message);
                 }
-                DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause(DEPRECATION_SUMMARY, null, contextualAdviceBuilder.toString());
+                SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause(DEPRECATION_SUMMARY, null, contextualAdviceBuilder.toString());
                 return true;
             }
         },

@@ -17,7 +17,7 @@
 package org.gradle.internal.deprecation;
 
 import org.gradle.internal.featurelifecycle.LoggingDeprecatedFeatureHandler;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +40,7 @@ public class LoggingDeprecatable implements Deprecatable {
     public void checkDeprecation() {
         String suffix = LoggingDeprecatedFeatureHandler.getRemovalDetails();
         for (String deprecation : deprecations) {
-            DeprecationLogger.nagUserWithDeprecatedBuildInvocationFeature(deprecation, String.format("This %s", suffix), null);
+            SingleMessageLogger.nagUserWithDeprecatedBuildInvocationFeature(deprecation, String.format("This %s", suffix), null);
         }
     }
 

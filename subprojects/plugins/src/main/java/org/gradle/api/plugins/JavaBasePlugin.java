@@ -52,7 +52,6 @@ import org.gradle.internal.model.RuleBasedPluginListener;
 import org.gradle.internal.reflect.Instantiator;
 import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.gradle.language.jvm.tasks.ProcessResources;
-import org.gradle.util.DeprecationLogger;
 import org.gradle.util.SingleMessageLogger;
 
 import javax.inject.Inject;
@@ -100,7 +99,7 @@ public class JavaBasePlugin implements Plugin<ProjectInternal> {
     }
 
     private JavaPluginConvention addExtensions(final ProjectInternal project) {
-        JavaPluginConvention javaConvention = DeprecationLogger.whileDisabled(new Factory<JavaPluginConvention>() {
+        JavaPluginConvention javaConvention = SingleMessageLogger.whileDisabled(new Factory<JavaPluginConvention>() {
             @Override
             public JavaPluginConvention create() {
                 return new JavaPluginConvention(project, instantiator);

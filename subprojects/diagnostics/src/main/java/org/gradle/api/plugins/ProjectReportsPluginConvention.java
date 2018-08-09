@@ -18,7 +18,7 @@ package org.gradle.api.plugins;
 
 import org.gradle.api.Project;
 import org.gradle.api.reporting.ReportingExtension;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.WrapUtil;
 
 import java.io.File;
@@ -38,7 +38,7 @@ public class ProjectReportsPluginConvention {
      */
     @Deprecated
     public ProjectReportsPluginConvention(Project project) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of ProjectReportsPluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of ProjectReportsPluginConvention");
         this.project = project;
     }
 

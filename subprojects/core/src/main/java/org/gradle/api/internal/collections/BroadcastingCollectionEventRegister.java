@@ -17,7 +17,7 @@ package org.gradle.api.internal.collections;
 
 import org.gradle.api.Action;
 import org.gradle.internal.ImmutableActionSet;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class BroadcastingCollectionEventRegister<T> implements CollectionEventRe
      */
     @Deprecated
     public Action<T> getAddAction() {
-        DeprecationLogger.nagUserOfDeprecated("Internal method BroadcastingCollectionEventRegister.getAddAction()");
+        SingleMessageLogger.nagUserOfDeprecated("Internal method BroadcastingCollectionEventRegister.getAddAction()");
         return new Action<T>() {
             @Override
             public void execute(T t) {

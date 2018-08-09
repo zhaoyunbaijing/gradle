@@ -21,7 +21,7 @@ import org.gradle.api.InvalidUserDataException;
 import org.gradle.language.scala.ScalaPlatform;
 import org.gradle.play.platform.PlayPlatform;
 import org.gradle.util.CollectionUtils;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.VersionNumber;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public enum PlayMajorVersion {
         VersionNumber versionNumber = VersionNumber.parse(playVersion);
         if (versionNumber.getMajor() == 2) {
             if (versionNumber.getMinor() == 2) {
-                DeprecationLogger.nagUserWith("Play 2.2 support has been deprecated.", "Please upgrade your Play.");
+                SingleMessageLogger.nagUserWith("Play 2.2 support has been deprecated.", "Please upgrade your Play.");
             }
             int index = versionNumber.getMinor() - 2;
             if (index < 0 || index >= values().length) {

@@ -116,7 +116,7 @@ import org.gradle.process.ExecSpec;
 import org.gradle.process.JavaExecSpec;
 import org.gradle.util.Configurable;
 import org.gradle.util.ConfigureUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.Path;
 
 import javax.annotation.Nullable;
@@ -1049,7 +1049,7 @@ public class DefaultProject extends AbstractPluginAware implements ProjectIntern
 
     @Override
     public Map<String, ?> getProperties() {
-        return DeprecationLogger.whileDisabled(new Factory<Map<String, ?>>() {
+        return SingleMessageLogger.whileDisabled(new Factory<Map<String, ?>>() {
             public Map<String, ?> create() {
                 return extensibleDynamicObject.getProperties();
             }

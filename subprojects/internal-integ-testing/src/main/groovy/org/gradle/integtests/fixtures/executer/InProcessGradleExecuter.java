@@ -62,7 +62,7 @@ import org.gradle.process.internal.JavaExecHandleBuilder;
 import org.gradle.test.fixtures.file.TestDirectoryProvider;
 import org.gradle.test.fixtures.file.TestFile;
 import org.gradle.testfixtures.internal.NativeServicesTestFixture;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GUtil;
 import org.gradle.util.GradleVersion;
 import org.gradle.util.SetSystemProperties;
@@ -126,7 +126,7 @@ public class InProcessGradleExecuter extends DaemonGradleExecuter {
 
     @Override
     public GradleExecuter reset() {
-        DeprecationLogger.reset();
+        SingleMessageLogger.reset();
         return super.reset();
     }
 

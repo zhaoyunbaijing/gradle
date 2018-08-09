@@ -21,9 +21,9 @@ void createDeprecations(int iterations) {
     for (int i=0; i<iterations; i++) {
         // every ~10th deprecation should have a different message
         if(random.nextInt(100) < 10) {
-            org.gradle.util.DeprecationLogger.nagUserOfDeprecated("Some unique deprecation No #\$i")
+            org.gradle.util.SingleMessageLogger.nagUserOfDeprecated("Some unique deprecation No #\$i")
         }
-        org.gradle.util.DeprecationLogger.nagUserOfDeprecated("Some repetive Deprecation")
+        org.gradle.util.SingleMessageLogger.nagUserOfDeprecated("Some repetive Deprecation")
     }
 }
 

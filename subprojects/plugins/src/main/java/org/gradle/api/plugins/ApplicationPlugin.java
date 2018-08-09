@@ -33,7 +33,7 @@ import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.Sync;
 import org.gradle.api.tasks.application.CreateStartScripts;
 import org.gradle.internal.Factory;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 import java.util.concurrent.Callable;
@@ -106,7 +106,7 @@ public class ApplicationPlugin implements Plugin<Project> {
     }
 
     private void addExtensions() {
-        pluginConvention = DeprecationLogger.whileDisabled(new Factory<ApplicationPluginConvention>() {
+        pluginConvention = SingleMessageLogger.whileDisabled(new Factory<ApplicationPluginConvention>() {
             @Override
             public ApplicationPluginConvention create() {
                 return new ApplicationPluginConvention(project);

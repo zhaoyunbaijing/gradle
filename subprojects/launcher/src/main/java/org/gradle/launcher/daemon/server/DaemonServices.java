@@ -50,7 +50,7 @@ import org.gradle.launcher.daemon.server.exec.HandleCancel;
 import org.gradle.launcher.daemon.server.exec.LogAndCheckHealth;
 import org.gradle.launcher.daemon.server.exec.LogToClient;
 import org.gradle.launcher.daemon.server.exec.RequestStopIfSingleUsedDaemon;
-import org.gradle.launcher.daemon.server.exec.ResetDeprecationLogger;
+import org.gradle.launcher.daemon.server.exec.ResetSingleMessageLogger;
 import org.gradle.launcher.daemon.server.exec.ReturnResult;
 import org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy;
 import org.gradle.launcher.daemon.server.exec.WatchForDisconnection;
@@ -145,7 +145,7 @@ public class DaemonServices extends DefaultServiceRegistry {
             new LogAndCheckHealth(healthStats, healthCheck),
             new ForwardClientInput(),
             new RequestStopIfSingleUsedDaemon(),
-            new ResetDeprecationLogger(),
+            new ResetSingleMessageLogger(),
             new WatchForDisconnection(),
             new ExecuteBuild(buildActionExecuter, runningStats, this)
         );

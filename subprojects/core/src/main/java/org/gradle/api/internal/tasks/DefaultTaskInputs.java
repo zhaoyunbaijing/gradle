@@ -31,7 +31,7 @@ import org.gradle.api.internal.tasks.properties.PropertyWalker;
 import org.gradle.api.tasks.TaskInputPropertyBuilder;
 import org.gradle.api.tasks.TaskInputs;
 import org.gradle.internal.typeconversion.UnsupportedNotationException;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -221,7 +221,7 @@ public class DefaultTaskInputs implements TaskInputsInternal {
                 try {
                     validator.validate(propertyName, value, context, severity);
                 } catch (UnsupportedNotationException ex) {
-                    DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause("Using TaskInputs." + method + "() with something that doesn't resolve to a File object", "Use TaskInputs.files() instead.");
+                    SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause("Using TaskInputs." + method + "() with something that doesn't resolve to a File object", "Use TaskInputs.files() instead.");
                 }
             }
         };

@@ -23,7 +23,7 @@ import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
 import org.gradle.api.tasks.compile.ForkOptions;
 import org.gradle.internal.Factory;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GUtil;
 
 import javax.annotation.Nullable;
@@ -144,7 +144,7 @@ public class JavaCompilerArgumentsBuilder {
             args.add("-encoding");
             args.add(compileOptions.getEncoding());
         }
-        String bootClasspath = DeprecationLogger.whileDisabled(new Factory<String>() {
+        String bootClasspath = SingleMessageLogger.whileDisabled(new Factory<String>() {
             @Nullable
             @Override
             @SuppressWarnings("deprecation")
@@ -228,7 +228,7 @@ public class JavaCompilerArgumentsBuilder {
             String current = argIterator.next();
             if (current.equals("-sourcepath") || current.equals("--source-path")) {
                 if (!silently) {
-                    DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause(
+                    SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause(
                         "Specifying the source path in the CompilerOptions compilerArgs property",
                         "Instead, use the CompilerOptions sourcepath property directly");
                 }

@@ -59,7 +59,7 @@ import org.gradle.internal.hash.HashCode;
 import org.gradle.internal.serialize.Serializer;
 import org.gradle.normalization.internal.InputNormalizationHandlerInternal;
 import org.gradle.normalization.internal.InputNormalizationStrategy;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -419,7 +419,7 @@ public class CacheBackedTaskHistoryRepository implements TaskHistoryRepository {
 
             @Override
             public void visitTree(FileTreeInternal fileTree) {
-                DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause("The ability to add non-directory-based file trees as declared outputs");
+                SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause("The ability to add non-directory-based file trees as declared outputs");
                 addAllPaths(fileTree, declaredOutputFilePaths, stringInterner);
             }
 

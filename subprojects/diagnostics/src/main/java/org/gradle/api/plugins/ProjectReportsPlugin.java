@@ -24,7 +24,7 @@ import org.gradle.api.tasks.diagnostics.DependencyReportTask;
 import org.gradle.api.tasks.diagnostics.PropertyReportTask;
 import org.gradle.api.tasks.diagnostics.TaskReportTask;
 import org.gradle.internal.Factory;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 import java.util.concurrent.Callable;
@@ -42,7 +42,7 @@ public class ProjectReportsPlugin implements Plugin<Project> {
     @Override
     public void apply(final Project project) {
         project.getPluginManager().apply(ReportingBasePlugin.class);
-        final ProjectReportsPluginConvention convention = DeprecationLogger.whileDisabled(new Factory<ProjectReportsPluginConvention>() {
+        final ProjectReportsPluginConvention convention = SingleMessageLogger.whileDisabled(new Factory<ProjectReportsPluginConvention>() {
             @Override
             public ProjectReportsPluginConvention create() {
                 return new ProjectReportsPluginConvention(project);

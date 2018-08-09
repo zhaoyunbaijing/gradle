@@ -24,7 +24,7 @@ import org.gradle.api.tasks.compile.CompileOptions;
 import org.gradle.api.tasks.compile.DebugOptions;
 import org.gradle.api.tasks.compile.ForkOptions;
 import org.gradle.internal.Factory;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -53,7 +53,7 @@ public class MinimalJavaCompileOptions implements Serializable {
         this.sourcepath = sourcepath == null ? null : ImmutableList.copyOf(sourcepath.getFiles());
         this.compilerArgs = Lists.newArrayList(compileOptions.getAllCompilerArgs());
         this.encoding = compileOptions.getEncoding();
-        this.bootClasspath = DeprecationLogger.whileDisabled(new Factory<String>() {
+        this.bootClasspath = SingleMessageLogger.whileDisabled(new Factory<String>() {
             @Nullable
             @Override
             @SuppressWarnings("deprecation")

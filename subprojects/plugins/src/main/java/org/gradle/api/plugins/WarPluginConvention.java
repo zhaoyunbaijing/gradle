@@ -17,7 +17,7 @@
 package org.gradle.api.plugins;
 
 import org.gradle.api.Project;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 
@@ -35,7 +35,7 @@ public class WarPluginConvention {
      */
     @Deprecated
     public WarPluginConvention(Project project) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of WarPluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of WarPluginConvention");
         this.project = project;
         webAppDirName = "src/main/webapp";
     }

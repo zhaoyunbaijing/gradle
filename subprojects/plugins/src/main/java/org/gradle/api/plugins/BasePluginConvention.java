@@ -19,7 +19,7 @@ package org.gradle.api.plugins;
 import org.gradle.api.Project;
 import org.gradle.api.internal.file.FileLookup;
 import org.gradle.api.internal.project.ProjectInternal;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 
@@ -47,7 +47,7 @@ public class BasePluginConvention {
      */
     @Deprecated
     public BasePluginConvention(Project project) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of BasePluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of BasePluginConvention");
         this.project = (ProjectInternal) project;
         archivesBaseName = project.getName();
         distsDirName = "distributions";

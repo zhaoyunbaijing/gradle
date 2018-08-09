@@ -57,7 +57,7 @@ import org.gradle.model.internal.core.MutableModelNode;
 import org.gradle.model.internal.core.NamedEntityInstantiator;
 import org.gradle.model.internal.type.ModelType;
 import org.gradle.util.ConfigureUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GUtil;
 
 import javax.annotation.Nullable;
@@ -560,7 +560,7 @@ public class DefaultTaskContainer extends DefaultTaskCollection<Task> implements
     }
 
     private void warnAboutPlaceholderDeprecation(String placeholderName) {
-        DeprecationLogger.nagUserOfDeprecated(
+        SingleMessageLogger.nagUserOfDeprecated(
             "Creating a custom task named '" + placeholderName + "'",
             "You can configure the existing task using the '" + placeholderName + " { }' syntax or create your custom task under a different name."
         );
@@ -686,14 +686,14 @@ public class DefaultTaskContainer extends DefaultTaskCollection<Task> implements
     @Deprecated
     @Override
     public boolean add(Task o) {
-        DeprecationLogger.nagUserOfReplacedMethodWithCustomRemoval("add()", "create() or register()", "This method will cause an error in Gradle 6.0.");
+        SingleMessageLogger.nagUserOfReplacedMethodWithCustomRemoval("add()", "create() or register()", "This method will cause an error in Gradle 6.0.");
         return addInternal(o);
     }
 
     @Deprecated
     @Override
     public boolean addAll(Collection<? extends Task> c) {
-        DeprecationLogger.nagUserOfReplacedMethodWithCustomRemoval("addAll()", "create() or register()", "This method will cause an error in Gradle 6.0.");
+        SingleMessageLogger.nagUserOfReplacedMethodWithCustomRemoval("addAll()", "create() or register()", "This method will cause an error in Gradle 6.0.");
         return addAllInternal(c);
     }
 

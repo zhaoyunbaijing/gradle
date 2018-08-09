@@ -26,7 +26,7 @@ import org.gradle.api.provider.Provider;
 import org.gradle.api.reporting.SingleFileReport;
 import org.gradle.api.resources.TextResource;
 import org.gradle.api.tasks.SourceSet;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 import java.util.Map;
@@ -70,7 +70,7 @@ public class CheckstylePlugin extends AbstractCodeQualityPlugin<Checkstyle> {
             @Override
             public Directory call() {
                 if (usesSubprojectCheckstyleConfiguration()) {
-                    DeprecationLogger.nagUserWithDeprecatedIndirectUserCodeCause("Setting the Checkstyle configuration file under 'config/checkstyle' of a sub project", "Use the root project's 'config/checkstyle' directory instead.");
+                    SingleMessageLogger.nagUserWithDeprecatedIndirectUserCodeCause("Setting the Checkstyle configuration file under 'config/checkstyle' of a sub project", "Use the root project's 'config/checkstyle' directory instead.");
                     return project.getLayout().getProjectDirectory().dir(CONFIG_DIR_NAME);
                 }
                 return project.getRootProject().getLayout().getProjectDirectory().dir(CONFIG_DIR_NAME);

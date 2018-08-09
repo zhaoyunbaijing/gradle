@@ -35,7 +35,7 @@ import org.gradle.api.publish.internal.DeferredConfigurablePublishingExtension;
 import org.gradle.api.publish.internal.PublicationInternal;
 import org.gradle.internal.model.RuleBasedPluginListener;
 import org.gradle.internal.reflect.Instantiator;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.inject.Inject;
 
@@ -89,7 +89,7 @@ public class PublishingPlugin implements Plugin<Project> {
         if (featurePreviews.isFeatureEnabled(FeaturePreviews.Feature.STABLE_PUBLISHING)) {
             return DefaultPublishingExtension.class;
         } else {
-            DeprecationLogger.nagUserWithDeprecatedBuildInvocationFeature(
+            SingleMessageLogger.nagUserWithDeprecatedBuildInvocationFeature(
                 "As part of making the publishing plugins stable, the 'deferred configurable' behavior of the 'publishing {}' block is now deprecated.",
                 "In Gradle 5.0 the 'enableFeaturePreview('STABLE_PUBLISHING')' flag will be removed and the new behavior will become the default.",
                     "Please add 'enableFeaturePreview('STABLE_PUBLISHING')' to your settings file and do a test run by publishing to a local repository. " +

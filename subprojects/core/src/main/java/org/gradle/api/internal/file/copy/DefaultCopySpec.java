@@ -41,7 +41,7 @@ import org.gradle.api.tasks.util.PatternSet;
 import org.gradle.internal.reflect.Instantiator;
 import org.gradle.internal.typeconversion.NotationParser;
 import org.gradle.util.ConfigureUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -133,7 +133,7 @@ public class DefaultCopySpec implements CopySpecInternal {
     public CopySpec from(Object sourcePath, Action<? super CopySpec> configureAction) {
         //noinspection ConstantConditions
         if (configureAction == null) {
-            DeprecationLogger.nagUserOfDeprecatedBehaviour("Gradle does not allow passing null for the configuration action for CopySpec.from().");
+            SingleMessageLogger.nagUserOfDeprecatedBehaviour("Gradle does not allow passing null for the configuration action for CopySpec.from().");
             from(sourcePath);
             return this;
         } else {
@@ -241,7 +241,7 @@ public class DefaultCopySpec implements CopySpecInternal {
     public CopySpec into(Object destPath, Action<? super CopySpec> copySpec) {
         //noinspection ConstantConditions
         if (copySpec == null) {
-            DeprecationLogger.nagUserOfDeprecatedBehaviour("Gradle does not allow passing null for the configuration action for CopySpec.into().");
+            SingleMessageLogger.nagUserOfDeprecatedBehaviour("Gradle does not allow passing null for the configuration action for CopySpec.into().");
             into(destPath);
             return this;
         } else {

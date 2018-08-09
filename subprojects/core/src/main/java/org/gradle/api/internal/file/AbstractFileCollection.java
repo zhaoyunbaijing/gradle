@@ -33,7 +33,7 @@ import org.gradle.api.specs.Specs;
 import org.gradle.api.tasks.StopExecutionException;
 import org.gradle.api.tasks.TaskDependency;
 import org.gradle.util.CollectionUtils;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 import org.gradle.util.GUtil;
 
 import javax.annotation.Nullable;
@@ -172,7 +172,7 @@ public abstract class AbstractFileCollection implements FileCollectionInternal {
 
     @Override
     public FileCollection stopExecutionIfEmpty() {
-        DeprecationLogger.nagUserOfDiscontinuedMethod("FileCollection.stopExecutionIfEmpty()");
+        SingleMessageLogger.nagUserOfDiscontinuedMethod("FileCollection.stopExecutionIfEmpty()");
         if (isEmpty()) {
             throw new StopExecutionException(String.format("%s does not contain any files.", getCapDisplayName()));
         }
@@ -186,19 +186,19 @@ public abstract class AbstractFileCollection implements FileCollectionInternal {
             return getFiles().toArray();
         }
         if (type.isAssignableFrom(File[].class)) {
-            DeprecationLogger.nagUserOfDeprecatedThing("Do not cast FileCollection to File[].");
+            SingleMessageLogger.nagUserOfDeprecatedThing("Do not cast FileCollection to File[].");
             Set<File> files = getFiles();
             return files.toArray(new File[0]);
         }
         if (type.isAssignableFrom(File.class)) {
-            DeprecationLogger.nagUserOfDeprecatedThing("Do not cast FileCollection to File.", "Call getSingleFile() instead.");
+            SingleMessageLogger.nagUserOfDeprecatedThing("Do not cast FileCollection to File.", "Call getSingleFile() instead.");
             return getSingleFile();
         }
         if (type.isAssignableFrom(FileCollection.class)) {
             return this;
         }
         if (type.isAssignableFrom(FileTree.class)) {
-            DeprecationLogger.nagUserOfDeprecatedThing("Do not cast FileCollection to FileTree.", "Call getAsFileTree() instead.");
+            SingleMessageLogger.nagUserOfDeprecatedThing("Do not cast FileCollection to FileTree.", "Call getAsFileTree() instead.");
             return getAsFileTree();
         }
         return DefaultGroovyMethods.asType(this, type);
@@ -206,7 +206,7 @@ public abstract class AbstractFileCollection implements FileCollectionInternal {
 
     @Override
     public TaskDependency getBuildDependencies() {
-        DeprecationLogger.nagUserOfDiscontinuedMethod("AbstractFileCollection.getBuildDependencies()", "Do not extend AbstractFileCollection. Use Project.files() instead.", getClass().getName() + " extends AbstractFileCollection.");
+        SingleMessageLogger.nagUserOfDiscontinuedMethod("AbstractFileCollection.getBuildDependencies()", "Do not extend AbstractFileCollection. Use Project.files() instead.", getClass().getName() + " extends AbstractFileCollection.");
         return TaskDependencies.EMPTY;
     }
 

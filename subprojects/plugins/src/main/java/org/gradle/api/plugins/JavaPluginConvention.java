@@ -30,7 +30,7 @@ import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.internal.Actions;
 import org.gradle.internal.reflect.Instantiator;
 import org.gradle.testing.base.plugins.TestingBasePlugin;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.io.File;
 
@@ -61,7 +61,7 @@ public class JavaPluginConvention {
      */
     @Deprecated
     public JavaPluginConvention(ProjectInternal project, Instantiator instantiator) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of JavaPluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of JavaPluginConvention");
         this.project = project;
         sourceSets = instantiator.newInstance(DefaultSourceSetContainer.class, project.getFileResolver(), project.getTasks(), instantiator,
             project.getServices().get(SourceDirectorySetFactory.class));

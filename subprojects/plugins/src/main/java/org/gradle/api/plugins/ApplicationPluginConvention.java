@@ -19,7 +19,7 @@ package org.gradle.api.plugins;
 import org.gradle.api.Incubating;
 import org.gradle.api.Project;
 import org.gradle.api.file.CopySpec;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,7 @@ public class ApplicationPluginConvention {
      */
     @Deprecated
     public ApplicationPluginConvention(Project project) {
-        DeprecationLogger.nagUserOfDeprecated("Creating instances of ApplicationPluginConvention");
+        SingleMessageLogger.nagUserOfDeprecated("Creating instances of ApplicationPluginConvention");
         this.project = project;
         applicationDistribution = project.copySpec();
     }

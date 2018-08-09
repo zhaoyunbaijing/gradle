@@ -34,7 +34,7 @@ import org.gradle.api.tasks.Optional;
 import org.gradle.internal.Factory;
 import org.gradle.internal.UncheckedException;
 import org.gradle.util.DeferredUtil;
-import org.gradle.util.DeprecationLogger;
+import org.gradle.util.SingleMessageLogger;
 
 import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
@@ -77,7 +77,7 @@ public abstract class AbstractNestedRuntimeBeanNode extends RuntimeBeanNode<Obje
             @Override
             @Nullable
             public Object get() {
-                Object value = DeprecationLogger.whileDisabled(new Factory<Object>() {
+                Object value = SingleMessageLogger.whileDisabled(new Factory<Object>() {
                     public Object create() {
                         try {
                             return method.invoke(bean);
