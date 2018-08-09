@@ -1271,8 +1271,8 @@ class CopyTaskIntegrationSpec extends AbstractIntegrationSpec {
         executer.withFullDeprecationStackTraceDisabled()
         run 'copy'
         then:
-        output.contains "Gradle does not allow passing null for the configuration action for CopySpec.from(). This behaviour has been deprecated and is scheduled to be removed in Gradle 5.0"
-        output.contains "Gradle does not allow passing null for the configuration action for CopySpec.into(). This behaviour has been deprecated and is scheduled to be removed in Gradle 5.0"
+        output.contains "Gradle does not allow passing null for the configuration action for CopySpec.from()."
+        output.contains "Gradle does not allow passing null for the configuration action for CopySpec.into()."
     }
 
 }

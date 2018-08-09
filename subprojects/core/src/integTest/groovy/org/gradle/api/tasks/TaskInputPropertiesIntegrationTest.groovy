@@ -239,7 +239,8 @@ class TaskInputPropertiesIntegrationTest extends AbstractIntegrationSpec {
         expect:
         executer.expectDeprecationWarning()
         succeeds "test"
-        output.contains "The chaining of the $method method has been deprecated. This is scheduled to be removed in Gradle 5.0. Use '$method' on TaskInputs directly instead."
+        output.contains "The chaining of the $method method has been deprecated."
+        output.contains "Use '$method' on TaskInputs directly instead."
 
         where:
         method                     | call
@@ -502,7 +503,8 @@ task someTask(type: SomeTask) {
         expect:
         executer.expectDeprecationWarning().withFullDeprecationStackTraceDisabled()
         succeeds "test"
-        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated. This is scheduled to be removed in Gradle 5.0. A problem was found with the configuration of task ':test'.
+        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated."""
+        outputContains """A problem was found with the configuration of task ':test'.
  - No value has been specified for property 'input'."""
     }
 
@@ -528,7 +530,8 @@ task someTask(type: SomeTask) {
         expect:
         executer.expectDeprecationWarning().withFullDeprecationStackTraceDisabled()
         succeeds "test"
-        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated. This is scheduled to be removed in Gradle 5.0. A problem was found with the configuration of task ':test'.
+        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated."""
+        outputContains """A problem was found with the configuration of task ':test'.
  - No value has been specified for property 'input'."""
 
         where:
@@ -561,7 +564,8 @@ task someTask(type: SomeTask) {
         expect:
         executer.expectDeprecationWarning().withFullDeprecationStackTraceDisabled()
         succeeds "test"
-        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated. This is scheduled to be removed in Gradle 5.0. A problem was found with the configuration of task ':test'.
+        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated."""
+        outputContains """A problem was found with the configuration of task ':test'.
  - No value has been specified for property 'output'."""
 
         where:
@@ -595,7 +599,8 @@ task someTask(type: SomeTask) {
         expect:
         executer.expectDeprecationWarning().withFullDeprecationStackTraceDisabled()
         succeeds "test"
-        def expectedString = """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated. This is scheduled to be removed in Gradle 5.0. A problem was found with the configuration of task ':test'.
+        def expectedString = """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated."""
+        outputContains """A problem was found with the configuration of task ':test'.
  - $type '${file("missing")}' specified for property 'input' does not exist."""
         output.contains expectedString
 
@@ -619,7 +624,8 @@ task someTask(type: SomeTask) {
         expect:
         executer.expectDeprecationWarning().withFullDeprecationStackTraceDisabled()
         succeeds "test"
-        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated. This is scheduled to be removed in Gradle 5.0. A problem was found with the configuration of task ':test'.
+        output.contains """Registering invalid inputs and outputs via TaskInputs and TaskOutputs methods has been deprecated."""
+        outputContains """A problem was found with the configuration of task ':test'.
  - ${type.capitalize()} '${file(path)}' specified for property 'input' is not a $type."""
 
         where:
