@@ -72,6 +72,9 @@ The previously deprecated support for Play Framework 2.2 has been removed.
 - Removed the class `SimpleWorkResult`.
 - Removed the methods `file` and `files` from `TaskDestroyables`.
 - Removed the property `styleSheet` from `ScalaDocOptions`.
+- Removed the property `classesDir` from `JDepend`.
+- Removed the property `testClassesDir` from `Test`.
+- Removed the property `classesDir` from `SourceSetOutput`.
 
 ## External contributions
 
