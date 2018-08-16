@@ -145,6 +145,7 @@ allprojects {
         maven(url = "https://repo.gradle.org/gradle/libs-milestones")
         maven(url = "https://repo.gradle.org/gradle/libs-snapshots")
         maven(url = kotlinDevMirrorUrl ?: "https://dl.bintray.com/kotlin/kotlin-dev")
+        maven(url = "https://jitpack.io")
     }
 
     // patchExternalModules lives in the root project - we need to activate normalization there, too.

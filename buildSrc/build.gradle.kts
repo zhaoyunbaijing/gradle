@@ -148,9 +148,13 @@ tasks.named("build").configure { dependsOn(checkSameDaemonArgs) }
 fun Project.applyGroovyProjectConventions() {
     apply(plugin = "groovy")
 
+    repositories {
+        maven(url = "https://jitpack.io")
+    }
+
     dependencies {
         compile(localGroovy())
-        testCompile("org.spockframework:spock-core:1.1-groovy-2.4")
+        testCompile("org.spockframework.spock:spock-core:spock-1.2-RC1")
         testCompile("cglib:cglib:3.2.6")
         testCompile("org.objenesis:objenesis:2.4")
         constraints {
