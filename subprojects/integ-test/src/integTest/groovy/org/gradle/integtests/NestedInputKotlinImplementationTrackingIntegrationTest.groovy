@@ -47,6 +47,11 @@ class NestedInputKotlinImplementationTrackingIntegrationTest extends AbstractPlu
         executedAndNotSkipped(':myTask')
 
         when:
+        run 'myTask'
+        then:
+        skipped(':myTask')
+
+        when:
         buildFile.text = """
             tasks.create<TaskWithNestedAction>("myTask") {
                 action = Action { writeText("changed") }
@@ -73,6 +78,11 @@ class NestedInputKotlinImplementationTrackingIntegrationTest extends AbstractPlu
         run 'myTask'
         then:
         executedAndNotSkipped(':myTask')
+
+        when:
+        run 'myTask'
+        then:
+        skipped(':myTask')
 
         when:
         buildFile.text = """
