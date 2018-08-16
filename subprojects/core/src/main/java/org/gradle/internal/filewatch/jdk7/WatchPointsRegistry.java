@@ -35,11 +35,9 @@ class WatchPointsRegistry {
     private final CombinedRootSubset rootSubset = new CombinedRootSubset();
     private ImmutableSet<? extends File> allRequestedRoots;
     private final boolean createNewStartingPointsUnderExistingRoots;
-    private final FileSystem fileSystem;
 
-    public WatchPointsRegistry(boolean createNewStartingPointsUnderExistingRoots, FileSystem fileSystem) {
+    public WatchPointsRegistry(boolean createNewStartingPointsUnderExistingRoots) {
         this.createNewStartingPointsUnderExistingRoots = createNewStartingPointsUnderExistingRoots;
-        this.fileSystem = fileSystem;
         allRequestedRoots = ImmutableSet.of();
     }
 
@@ -163,30 +161,39 @@ class WatchPointsRegistry {
     }
 
     private static class CombinedRootSubset {
-        private FileSystemSubset combinedFileSystemSubset;
+        private final FileSystemSubset.Builder combinedFileSystemSubsetBuilder;
+
+        private boolean rootsUpToDate;
         private Iterable<? extends File> roots;
         private FileSystemSubset unfiltered;
+        private FileSystemSubset combinedFileSystemSubset;
 
         public CombinedRootSubset() {
-            combinedFileSystemSubset = FileSystemSubset.builder().build();
-            updateRoots();
+            combinedFileSystemSubsetBuilder = FileSystemSubset.builder();
         }
 
         public void append(FileSystemSubset fileSystemSubset) {
-            combinedFileSystemSubset = FileSystemSubset.builder().add(combinedFileSystemSubset).add(fileSystemSubset).build();
-            updateRoots();
+            combinedFileSystemSubsetBuilder.add(fileSystemSubset);
+            rootsUpToDate = false;
         }
 
-        private void updateRoots() {
+        private void ensureRootsUpToDate() {
+            if (rootsUpToDate) {
+                return;
+            }
+            combinedFileSystemSubset = combinedFileSystemSubsetBuilder.build();
             roots = combinedFileSystemSubset.getRoots();
             unfiltered = new FileSystemSubset(ImmutableList.copyOf(roots), ImmutableList.<ImmutableDirectoryTree>of());
+            rootsUpToDate = true;
         }
 
         public boolean isInRootsOrAncestorOrAnyRoot(File directory) {
+            ensureRootsUpToDate();
             return inCombinedRootsOrAncestorOfAnyRoot(directory, roots, unfiltered);
         }
 
         public boolean contains(File file) {
+            ensureRootsUpToDate();
             return combinedFileSystemSubset.contains(file);
         }
     }
